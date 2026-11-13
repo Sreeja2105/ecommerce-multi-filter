@@ -1,0 +1,144 @@
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #1f2330;
+  --muted: #6b7180;
+  --border: #e3e5ec;
+  --accent: #4f46e5;
+  --accent-soft: #e0e7ff;
+  --star: #f5a524;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 32px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+.topbar h1 { margin: 0; font-size: 1.4rem; color: var(--accent); }
+.tagline { color: var(--muted); font-size: 0.9rem; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  padding: 24px 32px;
+  align-items: start;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: sticky;
+  top: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.sidebar-head { display: flex; justify-content: space-between; align-items: center; }
+.sidebar-head h2 { margin: 0; font-size: 1.1rem; }
+.filter-group { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 16px; }
+.filter-group h3 { margin: 0 0 12px; font-size: 0.95rem; }
+
+.checklist label,
+.radiolist label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+.checklist .count { margin-left: auto; color: var(--muted); font-size: 0.8rem; }
+.radiolist .stars { color: var(--star); letter-spacing: 1px; }
+input[type='checkbox'], input[type='radio'] { accent-color: var(--accent); }
+
+.link-btn {
+  background: none; border: none; color: var(--accent);
+  cursor: pointer; font-size: 0.85rem; padding: 0;
+}
+
+/* Dual-point range slider */
+.price-values { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; }
+.range-slider { position: relative; height: 24px; }
+.range-track, .range-fill {
+  position: absolute; top: 50%; height: 6px; transform: translateY(-50%); border-radius: 3px;
+}
+.range-track { left: 0; right: 0; background: var(--border); }
+.range-fill { background: var(--accent); }
+.range-slider input[type='range'] {
+  position: absolute; left: 0; top: 0; width: 100%; height: 24px; margin: 0;
+  background: none; pointer-events: none; -webkit-appearance: none; appearance: none;
+}
+.range-slider input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none; pointer-events: auto; width: 18px; height: 18px; border-radius: 50%;
+  background: #fff; border: 3px solid var(--accent); cursor: pointer;
+}
+.range-slider input[type='range']::-moz-range-thumb {
+  pointer-events: auto; width: 14px; height: 14px; border-radius: 50%;
+  background: #fff; border: 3px solid var(--accent); cursor: pointer;
+}
+.range-slider input[type='range']::-moz-range-track { background: none; }
+
+/* ---------- Content ---------- */
+.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.result-count { margin: 0; color: var(--muted); }
+.sort { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+.sort select {
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--card); font-size: 0.9rem; cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  transition: opacity 0.15s;
+}
+.grid.loading { opacity: 0.5; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); }
+.card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--accent-soft); }
+.card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.card-category { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+.card-name { margin: 0; font-size: 1rem; }
+.card-rating { color: var(--star); font-size: 0.9rem; }
+.card-rating span { color: var(--muted); margin-left: 4px; }
+.card-price { font-size: 1.15rem; font-weight: 700; }
+
+.empty-state {
+  text-align: center; padding: 64px 24px; background: var(--card);
+  border: 1px dashed var(--border); border-radius: var(--radius);
+}
+.empty-state p { font-size: 1.1rem; color: var(--muted); }
+.primary-btn {
+  background: var(--accent); color: #fff; border: none; border-radius: 8px;
+  padding: 10px 20px; font-size: 0.95rem; cursor: pointer;
+}
+.hidden { display: none !important; }
+
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; padding: 16px; }
+  .sidebar { position: static; }
+}
